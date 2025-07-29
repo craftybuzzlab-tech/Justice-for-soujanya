@@ -1,13 +1,3 @@
-<script type="text/javascript">
-	atOptions = {
-		'key' : '0702b151uh5u2EEmEQJYMWrSnScCB1LQSyPMmsf',
-		'format' : 'iframe',
-		'height' : 60,
-		'width' : 468,
-		'params' : {}
-	};
-</script>
-<script type="text/javascript" src="//www.highperformanceformat.com/0702b151uh5u2EEmEQJYMWrSnScCB1LQSyPMmsf/invoke.js"></script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,6 +24,7 @@
             min-height: 100vh;
         }
 
+        /* --- Styles for Ad Containers --- */
         .ad-container-top, .ad-container-bottom {
             position: fixed;
             left: 0;
@@ -91,31 +82,10 @@
         .fire-popup { position: absolute; left: 50%; top: 50%; font-size: 2.5em; animation: float-up 1.5s ease-out forwards; pointer-events: none; }
         @keyframes float-up { 0% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 100% { opacity: 0; transform: translate(-50%, -150px) scale(1.5); } }
 
-        /* --- **UPDATED** Share buttons container to handle 3 buttons --- */
-        .share-buttons-container {
-            margin-top: 25px;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-        .share-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            color: white;
-            padding: 12px 25px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 1.2em;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+        .share-buttons-container { margin-top: 25px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .share-btn { display: inline-flex; align-items: center; gap: 10px; color: white; padding: 12px 25px; border-radius: 8px; text-decoration: none; font-size: 1.2em; font-weight: bold; border: none; cursor: pointer; transition: background-color 0.3s; }
         #whatsapp-share-btn { background-color: #25D366; }
         #whatsapp-share-btn:hover { background-color: #128C7E; }
-        /* **NEW** Copy button style */
         #copy-link-btn { background-color: #007bff; }
         #copy-link-btn:hover { background-color: #0056b3; }
         .share-btn svg { width: 28px; height: 28px; fill: white; }
@@ -129,8 +99,15 @@
 </head>
 <body>
     <div class="ad-container-top">
+        <!-- **UPDATED** Ad Script -->
         <script type="text/javascript">
-            atOptions = { 'key' : '0702b151wUmbCxfRaxiitBdmNyEy9r5W1tjjek1', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} };
+            atOptions = {
+                'key' : '0702b151wUmbCxfRaxiitBdmNyEy9r5W1tjjek1',
+                'format' : 'iframe',
+                'height' : 60,
+                'width' : 468,
+                'params' : {}
+            };
         </script>
         <script type="text/javascript" src="//www.highperformanceformat.com/0702b151wUmbCxfRaxiitBdmNyEy9r5W1tjjek1/invoke.js"></script>
     </div>
@@ -155,13 +132,11 @@
                 </button>
             </div>
         </div>
-        <!-- **UPDATED** Share Buttons container -->
         <div class="share-buttons-container">
             <button id="whatsapp-share-btn" class="share-btn">
                 <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.61 15.35 3.48 16.81L2.1 21.9L7.45 20.58C8.85 21.36 10.42 21.82 12.04 21.82C17.5 21.82 21.95 17.37 21.95 11.91C21.95 9.25 20.92 6.78 19.05 4.91C17.18 3.03 14.71 2 12.04 2M12.04 20.14C10.59 20.14 9.17 19.72 7.96 19L7.54 18.76L4.29 19.57L5.12 16.4L4.86 15.96C4.04 14.65 3.61 13.15 3.61 11.91C3.61 7.33 7.42 3.53 12.04 3.53C14.28 3.53 16.33 4.38 17.89 5.94C19.45 7.5 20.3 9.55 20.3 11.91C20.3 16.5 16.5 20.14 12.04 20.14M17.43 14.86C17.21 14.75 16.06 14.2 15.85 14.12C15.63 14.04 15.47 13.99 15.31 14.21C15.15 14.42 14.68 14.99 14.53 15.15C14.37 15.31 14.22 15.33 14 15.22C13.78 15.12 12.98 14.84 12.03 14C11.23 13.29 10.69 12.43 10.54 12.22C10.38 12 10.25 11.85 10.41 11.69C10.56 11.53 10.72 11.33 10.85 11.17C10.98 11.02 11.03 10.91 11.13 10.74C11.24 10.56 11.18 10.41 11.08 10.31C10.98 10.21 10.47 9.95 10.27 9.85C10.08 9.75 9.92 9.72 9.75 9.72C9.59 9.72 9.42 9.77 9.27 9.92C9.11 10.08 8.65 10.54 8.5 10.69C8.34 10.85 8.19 10.88 7.97 10.88C7.75 10.88 7.55 10.83 7.35 10.73C7.15 10.63 6.34 10.35 5.39 9.47C4.6 8.76 4.05 7.9 3.9 7.68C3.75 7.47 3.88 7.33 4.03 7.19L4.03 7.19C4.16 7.08 4.29 6.94 4.41 6.82C4.54 6.69 4.59 6.58 4.69 6.41C4.79 6.23 4.74 6.08 4.64 5.98C4.54 5.88 4.03 5.63 3.83 5.53C3.64 5.43 3.48 5.4 3.31 5.4C3.15 5.4 2.98 5.45 2.82 5.6C2.67 5.76 2.2 6.23 2.05 6.38C1.9 6.54 17.43 14.86Z"/></svg>
                 <span>WhatsApp</span>
             </button>
-            <!-- **NEW** Copy Link Button -->
             <button id="copy-link-btn" class="share-btn">
                 <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
                 <span>Copy Link</span>
@@ -170,6 +145,7 @@
     </div>
 
     <div class="ad-container-bottom">
+        <!-- **UPDATED** Ad Script -->
         <script type="text/javascript">
             atOptions = { 'key' : '0702b151wUmbCxfRaxiitBdmNyEy9r5W1tjjek1', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} };
         </script>
@@ -186,9 +162,7 @@
         const likeCountSpan = document.getElementById('like-count'); 
         const dislikeCountSpan = document.getElementById('dislike-count'); 
         const whatsappShareBtn = document.getElementById('whatsapp-share-btn');
-        // **NEW** Get the copy link button
         const copyLinkBtn = document.getElementById('copy-link-btn');
-
         const likesRef = database.ref('votes/likes'); 
         const dislikesRef = database.ref('votes/dislikes');
 
@@ -229,7 +203,6 @@
             window.open(whatsappUrl, '_blank');
         });
 
-        // **NEW** Copy Link button functionality
         copyLinkBtn.addEventListener('click', () => {
             navigator.clipboard.writeText(window.location.href).then(() => {
                 alert('Link copied to clipboard!');
@@ -240,13 +213,3 @@
     </script>
 </body>
 </html>
-<script type="text/javascript">
-	atOptions = {
-		'key' : '0702b151uh5u2EEmEQJYMWrSnScCB1LQSyPMmsf',
-		'format' : 'iframe',
-		'height' : 60,
-		'width' : 468,
-		'params' : {}
-	};
-</script>
-<script type="text/javascript" src="//www.highperformanceformat.com/0702b151uh5u2EEmEQJYMWrSnScCB1LQSyPMmsf/invoke.js"></script>
