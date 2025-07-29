@@ -16,7 +16,6 @@
             color: #fff;
             text-align: center;
             margin: 0;
-            /* **UPDATED**: Added padding for top and bottom ads */
             padding: 80px 20px;
             box-sizing: border-box;
             display: flex;
@@ -25,7 +24,6 @@
             min-height: 100vh;
         }
 
-        /* --- **NEW** Styles for Ad Containers --- */
         .ad-container-top, .ad-container-bottom {
             position: fixed;
             left: 0;
@@ -37,14 +35,8 @@
             backdrop-filter: blur(2px);
             z-index: 99;
         }
-        .ad-container-top {
-            top: 0;
-            padding: 5px 0;
-        }
-        .ad-container-bottom {
-            bottom: 0;
-            padding: 5px 0;
-        }
+        .ad-container-top { top: 0; padding: 5px 0; }
+        .ad-container-bottom { bottom: 0; padding: 5px 0; }
 
         .container {
             max-width: 600px;
@@ -57,7 +49,6 @@
             z-index: 1;
         }
 
-        /* --- "Real Fire" Heading Effect --- */
         .fire-heading {
             font-size: 2.8em;
             font-weight: bold;
@@ -73,16 +64,63 @@
             75% { text-shadow: 0 0 2px #FFF, 0 0 5px #FFF, 0 0 7px #FFF, 0 0 11px #ff8c00, 0 0 16px #ff8c00, 0 0 24px #ff5722, 0 0 32px #ff5722, 0 0 55px #ff5722; }
         }
 
-        /* --- Main Content Layout --- */
         .main-content { display: flex; align-items: center; justify-content: center; margin: 20px 0; gap: 15px; }
         .main-image { max-width: 60%; height: auto; border-radius: 10px; border: 3px solid #ff8c00; }
         
-        /* --- Burning Diya Effect --- */
-        .diya { width: 15%; position: relative; }
-        .diya::after { content: ''; position: absolute; width: 10px; height: 15px; background: #ffc107; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; top: 25%; left: 50%; transform: translateX(-50%); animation: flame-flicker 1.5s ease-in-out infinite; }
-        @keyframes flame-flicker { 0%, 100% { box-shadow: 0 0 5px #ffc107, 0 0 10px #ff9800, 0 0 15px #ff5722; transform: translateX(-50%) scaleY(1) scaleX(1); opacity: 1; } 50% { box-shadow: 0 0 8px #ffc107, 0 0 15px #ff9800, 0 0 25px #ff5722; transform: translateX(-45%) scaleY(1.05) scaleX(1.05); opacity: 0.9; } }
+        /* --- **UPDATED** Larger Diya and Brighter Flame Effect --- */
+        .diya {
+            width: 22%; /* Increased size */
+            position: relative;
+        }
         
-        /* Poll and Share Button styles are unchanged */
+        /* The main flame */
+        .diya::after {
+            content: '';
+            position: absolute;
+            width: 14px; /* Increased size */
+            height: 21px; /* Increased size */
+            background: #ffc107;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            top: 25%;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: flame-flicker 1.5s ease-in-out infinite;
+            z-index: 2; /* Flame is on top */
+        }
+
+        /* **NEW** The bright glint behind the flame */
+        .diya::before {
+            content: '?';
+            position: absolute;
+            top: 25%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 30px;
+            color: rgba(255, 255, 220, 0.8);
+            animation: bright-glint 3s ease-in-out infinite;
+            z-index: 1; /* Glint is behind the flame */
+        }
+        
+        /* Brighter glow animation */
+        @keyframes flame-flicker {
+            0%, 100% {
+                box-shadow: 0 0 5px #ffc107, 0 0 10px #ff9800, 0 0 15px #ff5722;
+                transform: translateX(-50%) scaleY(1) scaleX(1);
+                opacity: 1;
+            }
+            50% {
+                box-shadow: 0 0 10px #ffc107, 0 0 20px #ff9800, 0 0 35px #ff5722, 0 0 50px #ff5722; /* Brighter glow */
+                transform: translateX(-45%) scaleY(1.05) scaleX(1.05);
+                opacity: 0.9;
+            }
+        }
+        
+        /* Glint animation */
+        @keyframes bright-glint {
+            0%, 100% { transform: translateX(-50%) scale(0.8) rotate(0deg); opacity: 0.5; }
+            50% { transform: translateX(-50%) scale(1.2) rotate(180deg); opacity: 1; }
+        }
+        
         .poll-section { border-top: 1px solid #ff5722; padding-top: 15px; margin-top: 20px; }
         .poll-title { font-size: 1.5em; margin-bottom: 15px; font-weight: bold; }
         .poll-buttons { display: flex; justify-content: center; gap: 20px; }
@@ -98,23 +136,22 @@
         @media (max-width: 600px) {
             .fire-heading { font-size: 1.8em; }
             .main-image { max-width: 50%; }
-            .diya { width: 20%; }
+            .diya { width: 25%; } /* Slightly larger on mobile */
         }
     </style>
 </head>
 <body>
-    <!-- **NEW**: Top Ad Container -->
     <div class="ad-container-top">
         <script type="text/javascript">
             atOptions = {
-                'key' : '0702b15141b5735f6c75e7451917237f',
+                'key' : '0702b151uh5u2EEmEQJYMWrSnScCB1LQSyPMmsf',
                 'format' : 'iframe',
                 'height' : 60,
                 'width' : 468,
                 'params' : {}
             };
         </script>
-        <script type="text/javascript" src="//www.highperformanceformat.com/0702b15141b5735f6c75e7451917237f/invoke.js"></script>
+        <script type="text/javascript" src="//www.highperformanceformat.com/0702b151uh5u2EEmEQJYMWrSnScCB1LQSyPMmsf/invoke.js"></script>
     </div>
 
     <div class="container">
@@ -143,22 +180,21 @@
         </button>
     </div>
 
-    <!-- **NEW**: Bottom Ad Container -->
     <div class="ad-container-bottom">
         <script type="text/javascript">
             atOptions = {
-                'key' : '0702b15141b5735f6c75e7451917237f',
+                'key' : '0702b151uh5u2EEmEQJYMWrSnScCB1LQSyPMmsf',
                 'format' : 'iframe',
                 'height' : 60,
                 'width' : 468,
                 'params' : {}
             };
         </script>
-        <script type="text/javascript" src="//www.highperformanceformat.com/0702b15141b5735f6c75e7451917237f/invoke.js"></script>
+        <script type="text/javascript" src="//www.highperformanceformat.com/0702b151uh5u2EEmEQJYMWrSnScCB1LQSyPMmsf/invoke.js"></script>
     </div>
 
     <script>
-        // All Firebase and Poll logic is unchanged
+        // All JavaScript is unchanged
         const firebaseConfig = { apiKey: "AIzaSyCMawkDgEHVjTOtlVWy6doUBLEJFcW6qSo", authDomain: "justice-sowjanya-poll.firebaseapp.com", databaseURL: "https://justice-sowjanya-poll-default-rtdb.firebaseio.com", projectId: "justice-sowjanya-poll", storageBucket: "justice-sowjanya-poll.appspot.com", messagingSenderId: "601732076929", appId: "1:601732076929:web:c98d4dd38ab80a5eff0480", measurementId: "G-6P5TTVNRCB" };
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
@@ -170,8 +206,6 @@
         likeBtn.addEventListener('click', () => handleVote('like')); dislikeBtn.addEventListener('click', () => handleVote('dislike'));
         if (localStorage.getItem('sowjanyaVoted')) { likeBtn.classList.add('disabled'); dislikeBtn.classList.add('disabled'); likeBtn.disabled = true; dislikeBtn.disabled = true; }
         whatsappShareBtn.addEventListener('click', () => { const message = "Support the call for Justice for Sowjanya. See the details and cast your vote here: "; const websiteUrl = window.location.href; const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message + websiteUrl)}`; window.open(whatsappUrl, '_blank'); });
-
-        // The storm-related JavaScript has been removed.
     </script>
 </body>
 </html>
