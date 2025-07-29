@@ -12,50 +12,54 @@
     <style>
         body {
             font-family: sans-serif;
-            background-color: #1a1a1a;
+            background-color: #0c0f13;
             color: #fff;
             text-align: center;
             margin: 0;
             padding: 20px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
 
         .container {
             max-width: 600px;
-            margin: 0 auto;
+            margin: auto;
             border: 2px solid #ff5722;
             border-radius: 15px;
             padding: 20px;
-            background-color: #2c2c2c;
+            background-color: rgba(44, 44, 44, 0.9);
+            position: relative;
+            z-index: 1;
         }
 
-        /* --- Fire Effect Heading --- */
+        /* --- **UPDATED** "Liquid Fire" Heading Effect --- */
         .fire-heading {
             font-size: 2.8em;
             font-weight: bold;
             font-family: 'Arial Black', sans-serif;
-            color: #fff;
-            text-shadow:
-                0 0 4px #fff,
-                0 0 10px #fff,
-                0 0 20px #ff5722,
-                0 0 30px #ff5722,
-                0 0 40px #ff5722,
-                0 0 55px #ff8c00,
-                0 0 75px #ff8c00;
-            animation: flicker 1.5s infinite alternate;
+            color: transparent; /* Text is now transparent */
+            /* A fiery gradient is used as a background for the text */
+            background: url(https://media.giphy.com/media/3o7aD4grHwn8AUJjcA/giphy.gif) center/cover;
+            background-clip: text;
+            -webkit-background-clip: text; /* For Safari/Chrome */
+            text-shadow: 0 0 10px rgba(255, 100, 0, 0.5); /* Soft outer glow */
+            animation: text-flicker 3s linear infinite;
         }
         
-        @keyframes flicker {
-            0%, 100% {
-                text-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 20px #ff5722, 0 0 30px #ff5722, 0 0 40px #ff5722, 0 0 55px #ff8c00, 0 0 75px #ff8c00;
-            }
-            50% {
-                text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 22px #ff5722, 0 0 33px #ff5722, 0 0 44px #ff5722, 0 0 60px #ff8c00, 0 0 80px #ff8c00;
-            }
+        @keyframes text-flicker {
+            0% { opacity: 0.8; }
+            25% { opacity: 1; }
+            50% { opacity: 0.7; }
+            75% { opacity: 1; }
+            100% { opacity: 0.8; }
         }
 
-        /* --- Main Content Layout --- */
+        /* --- Main Content Layout with Layering --- */
         .main-content {
+            position: relative; /* Essential for layering */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -68,110 +72,95 @@
             height: auto;
             border-radius: 10px;
             border: 3px solid #ff8c00;
+            z-index: 1; /* Image is at the bottom layer */
+        }
+        
+        /* --- **NEW** Thunderstorm Above Image --- */
+        #storm-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 2; /* Storm is above the image */
         }
 
+        #lightning {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            opacity: 0;
+        }
+
+        .raindrop {
+            position: absolute; /* Changed to absolute */
+            bottom: 100%;
+            width: 2px;
+            height: 80px;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.4));
+            animation: rain-fall linear infinite;
+        }
+
+        @keyframes rain-fall {
+            to { transform: translateY(200%); } /* Adjusted for container */
+        }
+
+        /* --- **UPDATED** Burning Diya Effect --- */
         .diya {
             width: 15%;
-            animation: diya-flicker 2s ease-in-out infinite;
+            position: relative; /* Needed for the flame pseudo-element */
+            z-index: 3; /* Diyas are on the top layer */
+        }
+
+        .diya::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 15px;
+            background: #ffc107;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            /* Position the flame above the wick (adjust if needed) */
+            top: 25%;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: flame-flicker 1.5s ease-in-out infinite;
+        }
+
+        @keyframes flame-flicker {
+            0%, 100% {
+                box-shadow: 0 0 5px #ffc107, 0 0 10px #ff9800, 0 0 15px #ff5722;
+                transform: translateX(-50%) scaleY(1) scaleX(1);
+                opacity: 1;
+            }
+            50% {
+                box-shadow: 0 0 8px #ffc107, 0 0 15px #ff9800, 0 0 25px #ff5722;
+                transform: translateX(-45%) scaleY(1.05) scaleX(1.05);
+                opacity: 0.9;
+            }
         }
         
-        @keyframes diya-flicker {
-            0%, 100% { opacity: 0.9; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.05); }
-        }
-
-        /* --- Poll Section --- */
-        .poll-section {
-            border-top: 1px solid #ff5722;
-            padding-top: 15px;
-            margin-top: 20px;
-        }
+        /* Poll and Share Button styles are unchanged */
+        .poll-section { border-top: 1px solid #ff5722; padding-top: 15px; margin-top: 20px; }
+        .poll-title { font-size: 1.5em; margin-bottom: 15px; font-weight: bold; }
+        .poll-buttons { display: flex; justify-content: center; gap: 20px; }
+        .poll-btn { background-color: #444; border: 2px solid #ff8c00; color: #fff; padding: 10px 20px; border-radius: 8px; font-size: 1.2em; cursor: pointer; transition: background-color 0.3s, transform 0.2s; display: flex; align-items: center; gap: 8px; }
+        .poll-btn:hover { background-color: #ff5722; }
+        .poll-btn:active { transform: scale(0.95); }
+        .poll-btn.disabled { background-color: #333; cursor: not-allowed; opacity: 0.6; }
+        .poll-btn svg { width: 24px; height: 24px; fill: #fff; }
+        .whatsapp-share-btn { display: inline-flex; align-items: center; gap: 10px; background-color: #25D366; color: white; padding: 12px 25px; border-radius: 8px; text-decoration: none; font-size: 1.2em; font-weight: bold; margin-top: 25px; border: none; cursor: pointer; transition: background-color 0.3s; }
+        .whatsapp-share-btn:hover { background-color: #128C7E; }
+        .whatsapp-share-btn svg { width: 28px; height: 28px; fill: white; }
         
-        .poll-title {
-            font-size: 1.5em;
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
-
-        .poll-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .poll-btn {
-            background-color: #444;
-            border: 2px solid #ff8c00;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-size: 1.2em;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .poll-btn:hover {
-            background-color: #ff5722;
-        }
-        
-        .poll-btn:active {
-            transform: scale(0.95);
-        }
-
-        .poll-btn.disabled {
-            background-color: #333;
-            cursor: not-allowed;
-            opacity: 0.6;
-        }
-        
-        .poll-btn svg {
-            width: 24px;
-            height: 24px;
-            fill: #fff;
-        }
-
-        /* --- WhatsApp Share Button --- */
-        .whatsapp-share-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background-color: #25D366;
-            color: white;
-            padding: 12px 25px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 1.2em;
-            font-weight: bold;
-            margin-top: 25px;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .whatsapp-share-btn:hover {
-            background-color: #128C7E;
-        }
-        
-        .whatsapp-share-btn svg {
-            width: 28px;
-            height: 28px;
-            fill: white;
-        }
-        
-        /* Responsive styles for smaller screens */
         @media (max-width: 600px) {
-            .fire-heading {
-                font-size: 1.8em;
-            }
-            .main-image {
-                max-width: 50%;
-            }
-            .diya {
-                width: 20%;
-            }
+            .fire-heading { font-size: 1.8em; }
+            .main-image { max-width: 50%; }
+            .diya { width: 20%; }
         }
     </style>
 </head>
@@ -184,6 +173,11 @@
             <img src="diya.png" alt="Diya" class="diya">
             <img src="sowjanya-image.jpg" alt="Justice for Sowjanya" class="main-image">
             <img src="diya.png" alt="Diya" class="diya">
+            
+            <!-- **NEW** Storm Overlay is now inside main-content -->
+            <div id="storm-overlay">
+                <div id="lightning"></div>
+            </div>
         </div>
 
         <div class="poll-section">
@@ -207,78 +201,52 @@
     </div>
 
     <script>
-        // --- Firebase Configuration ---
-        // Your personal keys are now correctly placed here.
-        const firebaseConfig = {
-            apiKey: "AIzaSyCMawkDgEHVjTOtlVWy6doUBLEJFcW6qSo",
-            authDomain: "justice-sowjanya-poll.firebaseapp.com",
-            databaseURL: "https://justice-sowjanya-poll-default-rtdb.firebaseio.com",
-            projectId: "justice-sowjanya-poll",
-            storageBucket: "justice-sowjanya-poll.appspot.com",
-            messagingSenderId: "601732076929",
-            appId: "1:601732076929:web:c98d4dd38ab80a5eff0480",
-            measurementId: "G-6P5TTVNRCB"
-        };
-        // --- End of Configuration ---
-
-        // Initialize Firebase
+        const firebaseConfig = { apiKey: "AIzaSyCMawkDgEHVjTOtlVWy6doUBLEJFcW6qSo", authDomain: "justice-sowjanya-poll.firebaseapp.com", databaseURL: "https://justice-sowjanya-poll-default-rtdb.firebaseio.com", projectId: "justice-sowjanya-poll", storageBucket: "justice-sowjanya-poll.appspot.com", messagingSenderId: "601732076929", appId: "1:601732076929:web:c98d4dd38ab80a5eff0480", measurementId: "G-6P5TTVNRCB" };
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
+        const likeBtn = document.getElementById('like-btn'); const dislikeBtn = document.getElementById('dislike-btn'); const likeCountSpan = document.getElementById('like-count'); const dislikeCountSpan = document.getElementById('dislike-count'); const whatsappShareBtn = document.getElementById('whatsapp-share-btn');
+        const likesRef = database.ref('votes/likes'); const dislikesRef = database.ref('votes/dislikes');
+        likesRef.on('value', (snapshot) => { likeCountSpan.textContent = snapshot.val() || 0; });
+        dislikesRef.on('value', (snapshot) => { dislikeCountSpan.textContent = snapshot.val() || 0; });
+        function handleVote(type) { if (localStorage.getItem('sowjanyaVoted')) { alert('You have already voted.'); return; } const ref = (type === 'like') ? likesRef : dislikesRef; ref.transaction((currentCount) => (currentCount || 0) + 1); localStorage.setItem('sowjanyaVoted', 'true'); likeBtn.classList.add('disabled'); dislikeBtn.classList.add('disabled'); likeBtn.disabled = true; dislikeBtn.disabled = true; }
+        likeBtn.addEventListener('click', () => handleVote('like')); dislikeBtn.addEventListener('click', () => handleVote('dislike'));
+        if (localStorage.getItem('sowjanyaVoted')) { likeBtn.classList.add('disabled'); dislikeBtn.classList.add('disabled'); likeBtn.disabled = true; dislikeBtn.disabled = true; }
+        whatsappShareBtn.addEventListener('click', () => { const message = "Support the call for Justice for Sowjanya. See the details and cast your vote here: "; const websiteUrl = window.location.href; const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message + websiteUrl)}`; window.open(whatsappUrl, '_blank'); });
 
-        const likeBtn = document.getElementById('like-btn');
-        const dislikeBtn = document.getElementById('dislike-btn');
-        const likeCountSpan = document.getElementById('like-count');
-        const dislikeCountSpan = document.getElementById('dislike-count');
-        const whatsappShareBtn = document.getElementById('whatsapp-share-btn');
-        
-        const likesRef = database.ref('votes/likes');
-        const dislikesRef = database.ref('votes/dislikes');
+        // --- **UPDATED** Thunderstorm Effect JavaScript ---
+        function createRain() {
+            // Rain is now created inside the #storm-overlay
+            const rainContainer = document.getElementById('storm-overlay');
+            if (!rainContainer) return;
 
-        // Listen for real-time updates to the like count
-        likesRef.on('value', (snapshot) => {
-            const count = snapshot.val() || 0;
-            likeCountSpan.textContent = count;
-        });
-
-        // Listen for real-time updates to the dislike count
-        dislikesRef.on('value', (snapshot) => {
-            const count = snapshot.val() || 0;
-            dislikeCountSpan.textContent = count;
-        });
-
-        // Function to handle voting
-        function handleVote(type) {
-            if (localStorage.getItem('sowjanyaVoted')) {
-                alert('You have already voted.');
-                return;
+            for (let i = 0; i < 50; i++) { // Reduced number for performance
+                const drop = document.createElement('div');
+                drop.classList.add('raindrop');
+                drop.style.left = `${Math.floor(Math.random() * 100)}%`;
+                drop.style.animationDuration = `${Math.random() * 0.5 + 0.3}s`;
+                drop.style.animationDelay = `${Math.random() * 2}s`;
+                rainContainer.appendChild(drop);
             }
-            const ref = (type === 'like') ? likesRef : dislikesRef;
-            ref.transaction((currentCount) => {
-                return (currentCount || 0) + 1;
-            });
-            localStorage.setItem('sowjanyaVoted', 'true');
-            likeBtn.classList.add('disabled');
-            dislikeBtn.classList.add('disabled');
-            likeBtn.disabled = true;
-            dislikeBtn.disabled = true;
         }
 
-        likeBtn.addEventListener('click', () => handleVote('like'));
-        dislikeBtn.addEventListener('click', () => handleVote('dislike'));
-
-        if (localStorage.getItem('sowjanyaVoted')) {
-            likeBtn.classList.add('disabled');
-            dislikeBtn.classList.add('disabled');
-            likeBtn.disabled = true;
-            dislikeBtn.disabled = true;
+        function triggerLightning() {
+            const lightning = document.getElementById('lightning');
+            lightning.style.opacity = '0.7';
+            setTimeout(() => { lightning.style.opacity = '0'; }, 100);
+            setTimeout(() => { lightning.style.opacity = '0.5'; }, 200);
+            setTimeout(() => { lightning.style.opacity = '0'; }, 400);
         }
-        
-        whatsappShareBtn.addEventListener('click', () => {
-            const message = "Support the call for Justice for Sowjanya. See the details and cast your vote here: ";
-            const websiteUrl = window.location.href;
-            const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message + websiteUrl)}`;
-            window.open(whatsappUrl, '_blank');
-        });
+
+        window.onload = function() {
+            createRain();
+            (function loop() {
+                var rand = Math.round(Math.random() * (8000 - 2000)) + 2000;
+                setTimeout(function() {
+                        triggerLightning();
+                        loop();  
+                }, rand);
+            }());
+        };
     </script>
 </body>
 </html>
