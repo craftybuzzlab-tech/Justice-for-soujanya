@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Justice for Sowjanya</title>
+    
+    <!-- Firebase SDK Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #1a1a1a;
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            border: 2px solid #ff5722;
+            border-radius: 15px;
+            padding: 20px;
+            background-color: #2c2c2c;
+        }
+
+        /* --- Fire Effect Heading --- */
+        .fire-heading {
+            font-size: 2.8em;
+            font-weight: bold;
+            font-family: 'Arial Black', sans-serif;
+            color: #fff;
+            text-shadow:
+                0 0 4px #fff,
+                0 0 10px #fff,
+                0 0 20px #ff5722,
+                0 0 30px #ff5722,
+                0 0 40px #ff5722,
+                0 0 55px #ff8c00,
+                0 0 75px #ff8c00;
+            animation: flicker 1.5s infinite alternate;
+        }
+        
+        @keyframes flicker {
+            0%, 100% {
+                text-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 20px #ff5722, 0 0 30px #ff5722, 0 0 40px #ff5722, 0 0 55px #ff8c00, 0 0 75px #ff8c00;
+            }
+            50% {
+                text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 22px #ff5722, 0 0 33px #ff5722, 0 0 44px #ff5722, 0 0 60px #ff8c00, 0 0 80px #ff8c00;
+            }
+        }
+
+        /* --- Main Content Layout --- */
+        .main-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            gap: 15px;
+        }
+
+        .main-image {
+            max-width: 60%;
+            height: auto;
+            border-radius: 10px;
+            border: 3px solid #ff8c00;
+        }
+
+        .diya {
+            width: 15%;
+            animation: diya-flicker 2s ease-in-out infinite;
+        }
+        
+        @keyframes diya-flicker {
+            0%, 100% { opacity: 0.9; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+
+        /* --- Poll Section --- */
+        .poll-section {
+            border-top: 1px solid #ff5722;
+            padding-top: 15px;
+            margin-top: 20px;
+        }
+        
+        .poll-title {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .poll-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .poll-btn {
+            background-color: #444;
+            border: 2px solid #ff8c00;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .poll-btn:hover {
+            background-color: #ff5722;
+        }
+        
+        .poll-btn:active {
+            transform: scale(0.95);
+        }
+
+        .poll-btn.disabled {
+            background-color: #333;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        
+        .poll-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: #fff;
+        }
+
+        /* --- WhatsApp Share Button --- */
+        .whatsapp-share-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: #25D366;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 25px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .whatsapp-share-btn:hover {
+            background-color: #128C7E;
+        }
+        
+        .whatsapp-share-btn svg {
+            width: 28px;
+            height: 28px;
+            fill: white;
+        }
+        
+        /* Responsive styles for smaller screens */
+        @media (max-width: 600px) {
+            .fire-heading {
+                font-size: 1.8em;
+            }
+            .main-image {
+                max-width: 50%;
+            }
+            .diya {
+                width: 20%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="fire-heading">JUSTICE FOR SOWJANYA</h1>
+
+        <div class="main-content">
+            <img src="diya.png" alt="Diya" class="diya">
+            <img src="sowjanya-image.jpg" alt="Justice for Sowjanya" class="main-image">
+            <img src="diya.png" alt="Diya" class="diya">
+        </div>
+
+        <div class="poll-section">
+            <p class="poll-title">Poll</p>
+            <div class="poll-buttons">
+                <button id="like-btn" class="poll-btn">
+                    <svg viewBox="0 0 24 24"><path d="M23,10C23,8.89 22.1,8 21,8H14.68L15.64,3.43C15.66,3.33 15.67,3.22 15.67,3.11C15.67,2.7 15.5,2.32 15.23,2.05L14.17,1L7.59,7.58C7.22,7.95 7,8.45 7,9V19A2,2 0 0,0 9,21H18C18.83,21 19.54,20.5 19.84,19.78L22.86,12.73C22.95,12.5 23,12.26 23,12V10M1,21H5V9H1V21Z"/></svg>
+                    <span id="like-count">0</span>
+                </button>
+                <button id="dislike-btn" class="poll-btn">
+                    <svg viewBox="0 0 24 24"><path d="M19,15H23V3H19M15,3H6C5.17,3 4.46,3.5 4.16,4.22L1.14,11.27C1.05,11.5 1,11.74 1,12V14A2,2 0 0,0 3,16H9.31L8.36,20.57C8.34,20.67 8.33,20.78 8.33,20.89C8.33,21.3 8.5,21.68 8.77,21.95L9.83,23L16.41,16.41C16.78,16.05 17,15.55 17,15V5C17,3.89 16.1,3 15,3Z"/></svg>
+                    <span id="dislike-count">0</span>
+                </button>
+            </div>
+        </div>
+
+        <button id="whatsapp-share-btn" class="whatsapp-share-btn">
+             <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.61 15.35 3.48 16.81L2.1 21.9L7.45 20.58C8.85 21.36 10.42 21.82 12.04 21.82C17.5 21.82 21.95 17.37 21.95 11.91C21.95 9.25 20.92 6.78 19.05 4.91C17.18 3.03 14.71 2 12.04 2M12.04 20.14C10.59 20.14 9.17 19.72 7.96 19L7.54 18.76L4.29 19.57L5.12 16.4L4.86 15.96C4.04 14.65 3.61 13.15 3.61 11.91C3.61 7.33 7.42 3.53 12.04 3.53C14.28 3.53 16.33 4.38 17.89 5.94C19.45 7.5 20.3 9.55 20.3 11.91C20.3 16.5 16.5 20.14 12.04 20.14M17.43 14.86C17.21 14.75 16.06 14.2 15.85 14.12C15.63 14.04 15.47 13.99 15.31 14.21C15.15 14.42 14.68 14.99 14.53 15.15C14.37 15.31 14.22 15.33 14 15.22C13.78 15.12 12.98 14.84 12.03 14C11.23 13.29 10.69 12.43 10.54 12.22C10.38 12 10.25 11.85 10.41 11.69C10.56 11.53 10.72 11.33 10.85 11.17C10.98 11.02 11.03 10.91 11.13 10.74C11.24 10.56 11.18 10.41 11.08 10.31C10.98 10.21 10.47 9.95 10.27 9.85C10.08 9.75 9.92 9.72 9.75 9.72C9.59 9.72 9.42 9.77 9.27 9.92C9.11 10.08 8.65 10.54 8.5 10.69C8.34 10.85 8.19 10.88 7.97 10.88C7.75 10.88 7.55 10.83 7.35 10.73C7.15 10.63 6.34 10.35 5.39 9.47C4.6 8.76 4.05 7.9 3.9 7.68C3.75 7.47 3.88 7.33 4.03 7.19L4.03 7.19C4.16 7.08 4.29 6.94 4.41 6.82C4.54 6.69 4.59 6.58 4.69 6.41C4.79 6.23 4.74 6.08 4.64 5.98C4.54 5.88 4.03 5.63 3.83 5.53C3.64 5.43 3.48 5.4 3.31 5.4C3.15 5.4 2.98 5.45 2.82 5.6C2.67 5.76 2.2 6.23 2.05 6.38C1.9 6.54 17.43 14.86Z"/></svg>
+            <span>Share on WhatsApp</span>
+        </button>
+    </div>
+
+    <script>
+        // --- Firebase Configuration ---
+        // Your personal keys are now correctly placed here.
+        const firebaseConfig = {
+            apiKey: "AIzaSyCMawkDgEHVjTOtlVWy6doUBLEJFcW6qSo",
+            authDomain: "justice-sowjanya-poll.firebaseapp.com",
+            databaseURL: "https://justice-sowjanya-poll-default-rtdb.firebaseio.com",
+            projectId: "justice-sowjanya-poll",
+            storageBucket: "justice-sowjanya-poll.appspot.com",
+            messagingSenderId: "601732076929",
+            appId: "1:601732076929:web:c98d4dd38ab80a5eff0480",
+            measurementId: "G-6P5TTVNRCB"
+        };
+        // --- End of Configuration ---
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        const likeBtn = document.getElementById('like-btn');
+        const dislikeBtn = document.getElementById('dislike-btn');
+        const likeCountSpan = document.getElementById('like-count');
+        const dislikeCountSpan = document.getElementById('dislike-count');
+        const whatsappShareBtn = document.getElementById('whatsapp-share-btn');
+        
+        const likesRef = database.ref('votes/likes');
+        const dislikesRef = database.ref('votes/dislikes');
+
+        // Listen for real-time updates to the like count
+        likesRef.on('value', (snapshot) => {
+            const count = snapshot.val() || 0;
+            likeCountSpan.textContent = count;
+        });
+
+        // Listen for real-time updates to the dislike count
+        dislikesRef.on('value', (snapshot) => {
+            const count = snapshot.val() || 0;
+            dislikeCountSpan.textContent = count;
+        });
+
+        // Function to handle voting
+        function handleVote(type) {
+            if (localStorage.getItem('sowjanyaVoted')) {
+                alert('You have already voted.');
+                return;
+            }
+            const ref = (type === 'like') ? likesRef : dislikesRef;
+            ref.transaction((currentCount) => {
+                return (currentCount || 0) + 1;
+            });
+            localStorage.setItem('sowjanyaVoted', 'true');
+            likeBtn.classList.add('disabled');
+            dislikeBtn.classList.add('disabled');
+            likeBtn.disabled = true;
+            dislikeBtn.disabled = true;
+        }
+
+        likeBtn.addEventListener('click', () => handleVote('like'));
+        dislikeBtn.addEventListener('click', () => handleVote('dislike'));
+
+        if (localStorage.getItem('sowjanyaVoted')) {
+            likeBtn.classList.add('disabled');
+            dislikeBtn.classList.add('disabled');
+            likeBtn.disabled = true;
+            dislikeBtn.disabled = true;
+        }
+        
+        whatsappShareBtn.addEventListener('click', () => {
+            const message = "Support the call for Justice for Sowjanya. See the details and cast your vote here: ";
+            const websiteUrl = window.location.href;
+            const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message + websiteUrl)}`;
+            window.open(whatsappUrl, '_blank');
+        });
+    </script>
+</body>
+</html>
