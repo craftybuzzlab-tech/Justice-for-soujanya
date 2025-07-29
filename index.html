@@ -98,14 +98,14 @@
         <!-- **UPDATED** Ad Script -->
         <script type="text/javascript">
             atOptions = {
-                'key' : '0702b151wUmbCxfRaxiitBdmNyEy9r5W1tjjek1',
+                'key' : '0702b151Q6CGgTNkeVz5sT61EtbyoBvb5u5BcJ1',
                 'format' : 'iframe',
                 'height' : 60,
                 'width' : 468,
                 'params' : {}
             };
         </script>
-        <script type="text/javascript" src="//www.highperformanceformat.com/0702b151wUmbCxfRaxiitBdmNyEy9r5W1tjjek1/invoke.js"></script>
+        <script type="text/javascript" src="//www.highperformanceformat.com/0702b151Q6CGgTNkeVz5sT61EtbyoBvb5u5BcJ1/invoke.js"></script>
     </div>
 
     <div class="container">
@@ -137,26 +137,63 @@
     <div class="ad-container-bottom">
         <!-- **UPDATED** Ad Script -->
         <script type="text/javascript">
-            atOptions = { 'key' : '0702b151wUmbCxfRaxiitBdmNyEy9r5W1tjjek1', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} };
+            atOptions = { 'key' : '0702b151Q6CGgTNkeVz5sT61EtbyoBvb5u5BcJ1', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} };
         </script>
-        <script type="text/javascript" src="//www.highperformanceformat.com/0702b151wUmbCxfRaxiitBdmNyEy9r5W1tjjek1/invoke.js"></script>
+        <script type="text/javascript" src="//www.highperformanceformat.com/0702b151Q6CGgTNkeVz5sT61EtbyoBvb5u5BcJ1/invoke.js"></script>
     </div>
 
     <script>
-        // All JavaScript is exactly the same as the previous version
         const firebaseConfig = { apiKey: "AIzaSyCMawkDgEHVjTOtlVWy6doUBLEJFcW6qSo", authDomain: "justice-sowjanya-poll.firebaseapp.com", databaseURL: "https://justice-sowjanya-poll-default-rtdb.firebaseio.com", projectId: "justice-sowjanya-poll", storageBucket: "justice-sowjanya-poll.appspot.com", messagingSenderId: "601732076929", appId: "1:601732076929:web:c98d4dd38ab80a5eff0480", measurementId: "G-6P5TTVNRCB" };
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
-        const likeBtn = document.getElementById('like-btn'); const dislikeBtn = document.getElementById('dislike-btn'); const likeCountSpan = document.getElementById('like-count'); const dislikeCountSpan = document.getElementById('dislike-count'); const whatsappShareBtn = document.getElementById('whatsapp-share-btn');
-        const likesRef = database.ref('votes/likes'); const dislikesRef = database.ref('votes/dislikes');
+        
+        const likeBtn = document.getElementById('like-btn'); 
+        const dislikeBtn = document.getElementById('dislike-btn'); 
+        const likeCountSpan = document.getElementById('like-count'); 
+        const dislikeCountSpan = document.getElementById('dislike-count'); 
+        const whatsappShareBtn = document.getElementById('whatsapp-share-btn');
+        const likesRef = database.ref('votes/likes'); 
+        const dislikesRef = database.ref('votes/dislikes');
+
         likesRef.on('value', (snapshot) => { likeCountSpan.textContent = snapshot.val() || 0; });
         dislikesRef.on('value', (snapshot) => { dislikeCountSpan.textContent = snapshot.val() || 0; });
+
         function showFirePopup(type) { const pollButtons = document.querySelector('.poll-buttons'); const popup = document.createElement('span'); popup.className = 'fire-popup'; popup.textContent = (type === 'like') ? '??' : '??'; pollButtons.appendChild(popup); setTimeout(() => { popup.remove(); }, 1500); }
-        function handleVote(type) { if (localStorage.getItem('sowjanyaVoted')) { alert('You have already voted.'); return; } showFirePopup(type); const ref = (type === 'like') ? likesRef : dislikesRef; ref.transaction((currentCount) => (currentCount || 0) + 1); localStorage.setItem('sowjanyaVoted', 'true'); likeBtn.classList.add('disabled'); dislikeBtn.classList.add('disabled'); likeBtn.disabled = true; dislikeBtn.disabled = true; }
+
+        function handleVote(type) {
+            if (localStorage.getItem('sowjanyaVoted')) {
+                alert('You have already voted.');
+                return;
+            }
+            
+            showFirePopup(type);
+            
+            const ref = (type === 'like') ? likesRef : dislikesRef;
+            ref.transaction((currentCount) => (currentCount || 0) + 1);
+            
+            localStorage.setItem('sowjanyaVoted', 'true');
+            likeBtn.classList.add('disabled');
+            dislikeBtn.classList.add('disabled');
+            likeBtn.disabled = true;
+            dislikeBtn.disabled = true;
+        }
+
         likeBtn.addEventListener('click', () => handleVote('like'));
         dislikeBtn.addEventListener('click', () => handleVote('dislike'));
-        if (localStorage.getItem('sowjanyaVoted')) { likeBtn.classList.add('disabled'); dislikeBtn.classList.add('disabled'); likeBtn.disabled = true; dislikeBtn.disabled = true; }
-        whatsappShareBtn.addEventListener('click', () => { const message = "Support the call for Justice for Sowjanya. See the details and cast your vote here: "; const websiteUrl = window.location.href; const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message + websiteUrl)}`; window.open(whatsappUrl, '_blank'); });
+
+        if (localStorage.getItem('sowjanyaVoted')) {
+            likeBtn.classList.add('disabled');
+            dislikeBtn.classList.add('disabled');
+            likeBtn.disabled = true;
+            dislikeBtn.disabled = true;
+        }
+        
+        whatsappShareBtn.addEventListener('click', () => {
+            const message = "Support the call for Justice for Sowjanya. See the details and cast your vote here: ";
+            const websiteUrl = window.location.href;
+            const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message + websiteUrl)}`;
+            window.open(whatsappUrl, '_blank');
+        });
     </script>
 </body>
 </html>
