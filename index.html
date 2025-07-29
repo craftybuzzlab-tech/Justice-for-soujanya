@@ -16,8 +16,7 @@
             color: #fff;
             text-align: center;
             margin: 0;
-            /* Added padding for top and bottom ads */
-            padding: 80px 20px;
+            padding: 80px 20px; /* Space for top and bottom ads */
             box-sizing: border-box;
             display: flex;
             justify-content: center;
@@ -77,19 +76,10 @@
         .poll-btn:active { transform: scale(0.95); }
         .poll-btn.disabled { background-color: #333; cursor: not-allowed; opacity: 0.6; }
         .poll-btn svg { width: 24px; height: 24px; }
-        
-        /* --- **UPDATED** Heart Icon Colors --- */
-        #like-btn svg { fill: #e53935; } /* Red Heart */
-        #dislike-btn svg { fill: #212121; } /* Black Heart */
+        #like-btn svg { fill: #e53935; }
+        #dislike-btn svg { fill: #212121; }
 
-        .fire-popup {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            font-size: 2.5em;
-            animation: float-up 1.5s ease-out forwards;
-            pointer-events: none;
-        }
+        .fire-popup { position: absolute; left: 50%; top: 50%; font-size: 2.5em; animation: float-up 1.5s ease-out forwards; pointer-events: none; }
         @keyframes float-up { 0% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 100% { opacity: 0; transform: translate(-50%, -150px) scale(1.5); } }
 
         .whatsapp-share-btn { display: inline-flex; align-items: center; gap: 10px; background-color: #25D366; color: white; padding: 12px 25px; border-radius: 8px; text-decoration: none; font-size: 1.2em; font-weight: bold; margin-top: 25px; border: none; cursor: pointer; transition: background-color 0.3s; }
@@ -105,10 +95,17 @@
 </head>
 <body>
     <div class="ad-container-top">
+        <!-- **UPDATED** Ad Script -->
         <script type="text/javascript">
-            atOptions = { 'key' : '0702b151uh5u2EEmEQJYMWrSnScCB1LQSyPMmsf', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} };
+            atOptions = {
+                'key' : '0702b151wUmbCxfRaxiitBdmNyEy9r5W1tjjek1',
+                'format' : 'iframe',
+                'height' : 60,
+                'width' : 468,
+                'params' : {}
+            };
         </script>
-        <script type="text/javascript" src="//www.highperformanceformat.com/0702b151uh5u2EEmEQJYMWrSnScCB1LQSyPMmsf/invoke.js"></script>
+        <script type="text/javascript" src="//www.highperformanceformat.com/0702b151wUmbCxfRaxiitBdmNyEy9r5W1tjjek1/invoke.js"></script>
     </div>
 
     <div class="container">
@@ -138,71 +135,28 @@
     </div>
 
     <div class="ad-container-bottom">
+        <!-- **UPDATED** Ad Script -->
         <script type="text/javascript">
-            atOptions = { 'key' : '0702b151uh5u2EEmEQJYMWrSnScCB1LQSyPMmsf', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} };
+            atOptions = { 'key' : '0702b151wUmbCxfRaxiitBdmNyEy9r5W1tjjek1', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} };
         </script>
-        <script type="text/javascript" src="//www.highperformanceformat.com/0702b151uh5u2EEmEQJYMWrSnScCB1LQSyPMmsf/invoke.js"></script>
+        <script type="text/javascript" src="//www.highperformanceformat.com/0702b151wUmbCxfRaxiitBdmNyEy9r5W1tjjek1/invoke.js"></script>
     </div>
 
     <script>
+        // All JavaScript is exactly the same as the previous version
         const firebaseConfig = { apiKey: "AIzaSyCMawkDgEHVjTOtlVWy6doUBLEJFcW6qSo", authDomain: "justice-sowjanya-poll.firebaseapp.com", databaseURL: "https://justice-sowjanya-poll-default-rtdb.firebaseio.com", projectId: "justice-sowjanya-poll", storageBucket: "justice-sowjanya-poll.appspot.com", messagingSenderId: "601732076929", appId: "1:601732076929:web:c98d4dd38ab80a5eff0480", measurementId: "G-6P5TTVNRCB" };
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
-        
-        const likeBtn = document.getElementById('like-btn'); 
-        const dislikeBtn = document.getElementById('dislike-btn'); 
-        const likeCountSpan = document.getElementById('like-count'); 
-        const dislikeCountSpan = document.getElementById('dislike-count'); 
-        const whatsappShareBtn = document.getElementById('whatsapp-share-btn');
-        const likesRef = database.ref('votes/likes'); 
-        const dislikesRef = database.ref('votes/dislikes');
-
+        const likeBtn = document.getElementById('like-btn'); const dislikeBtn = document.getElementById('dislike-btn'); const likeCountSpan = document.getElementById('like-count'); const dislikeCountSpan = document.getElementById('dislike-count'); const whatsappShareBtn = document.getElementById('whatsapp-share-btn');
+        const likesRef = database.ref('votes/likes'); const dislikesRef = database.ref('votes/dislikes');
         likesRef.on('value', (snapshot) => { likeCountSpan.textContent = snapshot.val() || 0; });
         dislikesRef.on('value', (snapshot) => { dislikeCountSpan.textContent = snapshot.val() || 0; });
-
-        function showFirePopup(type) {
-            const pollButtons = document.querySelector('.poll-buttons');
-            const popup = document.createElement('span');
-            popup.className = 'fire-popup';
-            popup.textContent = (type === 'like') ? '??' : '??';
-            pollButtons.appendChild(popup);
-            setTimeout(() => { popup.remove(); }, 1500);
-        }
-
-        function handleVote(type) {
-            if (localStorage.getItem('sowjanyaVoted')) {
-                alert('You have already voted.');
-                return;
-            }
-            
-            showFirePopup(type);
-            
-            const ref = (type === 'like') ? likesRef : dislikesRef;
-            ref.transaction((currentCount) => (currentCount || 0) + 1);
-            
-            localStorage.setItem('sowjanyaVoted', 'true');
-            likeBtn.classList.add('disabled');
-            dislikeBtn.classList.add('disabled');
-            likeBtn.disabled = true;
-            dislikeBtn.disabled = true;
-        }
-
+        function showFirePopup(type) { const pollButtons = document.querySelector('.poll-buttons'); const popup = document.createElement('span'); popup.className = 'fire-popup'; popup.textContent = (type === 'like') ? '??' : '??'; pollButtons.appendChild(popup); setTimeout(() => { popup.remove(); }, 1500); }
+        function handleVote(type) { if (localStorage.getItem('sowjanyaVoted')) { alert('You have already voted.'); return; } showFirePopup(type); const ref = (type === 'like') ? likesRef : dislikesRef; ref.transaction((currentCount) => (currentCount || 0) + 1); localStorage.setItem('sowjanyaVoted', 'true'); likeBtn.classList.add('disabled'); dislikeBtn.classList.add('disabled'); likeBtn.disabled = true; dislikeBtn.disabled = true; }
         likeBtn.addEventListener('click', () => handleVote('like'));
         dislikeBtn.addEventListener('click', () => handleVote('dislike'));
-
-        if (localStorage.getItem('sowjanyaVoted')) {
-            likeBtn.classList.add('disabled');
-            dislikeBtn.classList.add('disabled');
-            likeBtn.disabled = true;
-            dislikeBtn.disabled = true;
-        }
-        
-        whatsappShareBtn.addEventListener('click', () => {
-            const message = "Support the call for Justice for Sowjanya. See the details and cast your vote here: ";
-            const websiteUrl = window.location.href;
-            const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message + websiteUrl)}`;
-            window.open(whatsappUrl, '_blank');
-        });
+        if (localStorage.getItem('sowjanyaVoted')) { likeBtn.classList.add('disabled'); dislikeBtn.classList.add('disabled'); likeBtn.disabled = true; dislikeBtn.disabled = true; }
+        whatsappShareBtn.addEventListener('click', () => { const message = "Support the call for Justice for Sowjanya. See the details and cast your vote here: "; const websiteUrl = window.location.href; const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message + websiteUrl)}`; window.open(whatsappUrl, '_blank'); });
     </script>
 </body>
 </html>
